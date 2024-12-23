@@ -16,7 +16,7 @@ This repository contains the implementation and evaluation of the AODV (Ad-hoc O
 
 ## How to Use
 
-1. Clone the repository: `git clone https://github.com/username/AODV-MANET-Analysis.git`
+1. Clone the repository: `git clone https://github.com/ronglua111x2/AODV-MANET-Analysis.git`
 2. Navigate to the project folder: `cd AODV-MANET-Analysis`
 3. Run the simulations using the provided Tcl scripts.
 4. Use the AWK scripts to process the simulation output and analyze the performance metrics.
