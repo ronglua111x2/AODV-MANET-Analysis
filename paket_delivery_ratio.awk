@@ -46,36 +46,36 @@ BEGIN {
 	
      recevepkt++;
 	
-  #if ( pac_id > maxpac_id ) maxpac_id = pac_id;
+  if ( pac_id > maxpac_id ) maxpac_id = pac_id;
    
-  #if ( ! ( pac_id in tempIn ) ) tempIn[pac_id] = tempo;
+  if ( ! ( pac_id in tempIn ) ) tempIn[pac_id] = tempo;
    
-  #if ( evento != "d" ) {
+  if ( evento != "d" ) {
         
-  #        if ( evento == "r" )  tempoFim[pac_id] = tempo;
+          if ( evento == "r" )  tempoFim[pac_id] = tempo;
    
-  #   } else tempoFim[pac_id] = 0;
+     } else tempoFim[pac_id] = 0;
 
 }
 END {
 
-   #for ( pac_id = 0; pac_id <= maxpac_id + 1; pac_id++ ) {
+   for ( pac_id = 0; pac_id <= maxpac_id + 1; pac_id++ ) {
      
-    #    duracao =  tempoFim[pac_id] - tempIn[pac_id];
+        duracao =  tempoFim[pac_id] - tempIn[pac_id];
       
-    #   if ( duracao > 0 ) {
-    #      sum = sum + duracao;
-    #   }
+       if ( duracao > 0 ) {
+          sum = sum + duracao;
+       }
    }
   
- #printf("Packets Sent = %d pkts\n", sendspkt);
+ printf("Packets Sent = %d packets\n", sendspkt);
  
- #printf("Packets Received = %d pkts\n", receivespkt);
+ printf("Packets Received = %d packets\n", receivespkt);
  
- #printf("Packet Delivery Ratio = %f \n", recevepkt/sendspkt*100);
+ printf("Packet Delivery Ratio = %f \n", recevepkt/sendspkt*100);
  
- #printf("Network Overhead = %d pkts\n", rountingpkts);
+ printf("Network Overhead = %d packets\n", rountingpkts);
  
- #exit 0
+ exit 0
 
 }

@@ -64,7 +64,7 @@ END {
 
         n_to_n_delay = n_to_n_delay/count;
 
-        print "Average end to end delay = " n_to_n_delay * 1000 "msec";
+        print "Average end to end delay = " n_to_n_delay * 1000 " ms";
 
 }
 

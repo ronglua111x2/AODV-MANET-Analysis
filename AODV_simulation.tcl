@@ -14,33 +14,20 @@ set val(ifq)    Queue/DropTail/PriQueue    ;# interface queue type
 set val(ll)     LL                         ;# link layer type
 set val(ant)    Antenna/OmniAntenna        ;# antenna model
 set val(ifqlen) 20                         ;# max packet in ifq
-set val(nn)     50                         ;# number of mobilenodes
+set val(nn)     30                         ;# number of mobilenodes
 set val(rp)     AODV                       ;# routing protocol
 set val(x)      7000                       ;# X dimension of topography
 set val(y)      7000                       ;# Y dimension of topography
-set val(stop)   100.0                      ;# time of simulation end
-set val(source) 4                          ;#
-set val(dest)   49                         ;#
+set val(stop)   40.0                       ;# time of simulation end
+set val(source) 0                          ;# 
+set val(dest)   24                         ;#
+set val(speed)  5                          ;#
 set ns [new Simulator]
-
-
-
-# define color index
-$ns color 0 red
-$ns color 1 blue
-$ns color 2 chocolate
-$ns color 3 red
-$ns color 4 brown
-$ns color 5 tan
-$ns color 6 gold
-$ns color 7 black
-
 
 #Setup topography object
 set topo [new Topography]
 $topo load_flatgrid $val(x) $val(y)
 create-god $val(nn)
-
 #Open the NS trace file
 set tracefile [open 20.tr w]
 $ns trace-all $tracefile
@@ -85,13 +72,13 @@ $n($id) set Z_ 0.0
 }
 for {set i 0} {$i < $val(nn)} {incr i} {
 if {$i%3 == 0} {
-$ns at 0.0 "$n($i) setdest [expr $i%7*1040+20] [expr $i%3*3000+20] 10"
+$ns at 0.0 "$n($i) setdest [expr $i%7*1040+20] [expr $i%3*3000+20] $val(speed)"
 }
 if {$i%3 == 1} {
-$ns at 0.0 "$n($i) setdest [expr $i%6+20] [expr $i%3*3000+20] 10"
+$ns at 0.0 "$n($i) setdest [expr $i%6+20] [expr $i%3*3000+20] $val(speed)"
 }
 if {$i%3 == 2} {
-$ns at 0.0 "$n($i) setdest [expr $i%7*1040+20] [expr $i%3+10] 10"
+$ns at 0.0 "$n($i) setdest [expr $i%7*1040+20] [expr $i%3+10] $val(speed)"
 }
 }
 
@@ -118,7 +105,7 @@ $ns connect $tcp $sink
 set ftp [new Application/FTP]
 $ftp attach-agent $tcp
 $ns at 0.1 "$ftp start"
-$ns at 100.0 "$ftp stop"
+$ns at 40.0 "$ftp stop"
 
 # In ns TCP connection will be green
 $tcp set fid_ 1
@@ -137,17 +124,6 @@ $ns connect $udp $null
 
 # Udp nam in connection red
 $udp set fid_ 2
-
-#===================================
-#        Applications Definition      
-#===================================
-# CBR application created on top of UDP connections
-set cbr [new Application/Traffic/CBR]
-$cbr attach-agent $udp
-$cbr set type_ CBR
-$cbr set packet_size_ 5120
-$cbr set rate_ 1mb
-$cbr set random_ false
 
 set now 3.0
 set time 3.0
