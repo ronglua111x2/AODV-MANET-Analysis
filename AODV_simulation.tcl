@@ -17,9 +17,9 @@ set val(rp)     AODV                       ;# routing protocol
 set val(x)      7000                       ;# X dimension of topography
 set val(y)      7000                       ;# Y dimension of topography
 set val(stop)   40.0                       ;# time of simulation end
-set val(source) 12                         ;# set source node
-set val(dest)   9                          ;# set dest node
-set val(speed)  5                          ;# set node speed
+set val(source) 0                         ;# set source node
+set val(dest)   24                          ;# set dest node
+set val(speed)  20                          ;# set node speed
 set ns [new Simulator]
 
 #Setup topography object
@@ -91,10 +91,7 @@ $ns at 0.0 "$n($val(dest)) label destination"
 $ns at 0.0 "$n($val(dest)) color orange"
 $n($val(dest)) color "orange"
    
-#===================================
-#        Agents Definition      
-#===================================
-
+#
 set tcp [new Agent/TCP/Newreno]
 $tcp set class_ 2
 set sink [new Agent/TCPSink]
@@ -108,11 +105,6 @@ $ns at $val(stop) "$ftp stop"
 
 # In ns TCP connection will be green
 $tcp set fid_ 1
-
-# To establish FTP application  tcp connection above
-#set ftp [new Application/FTP]
-#$ftp attach-agent $tcp
-#$ftp set type_ FTP
 
 # Establish a UDP connection
 set udp [new Agent/UDP]
@@ -131,9 +123,6 @@ $ns at [expr $now] "$ns trace-annotate \"Source broadcast route request packet t
 
 $ns at [expr $now] "$ns trace-annotate \"Destination sends route reply to Source \""
 
-#===================================
-#        Termination     
-#===================================
 #Define a 'finish' procedure
 proc finish {} {
     global ns tracefile namfile
