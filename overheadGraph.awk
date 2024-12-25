@@ -1,5 +1,5 @@
 ## AWK file for Network Overhead ##
-## awk -f overheadGraph.awk 20.tr > overhead.dat
+## awk -f overheadGraph.awk AODV.tr > overhead.dat
 ## xgraph overhead.dat -titles -title "Overhead" -title_x "Time" -title_y "Overhead"
 BEGIN{
     recvNumPacket = 0;# to calculate total number of data packets received

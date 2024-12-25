@@ -1,5 +1,5 @@
 ## AWK file for end to end delay. ## 
-## awk -f delayGraph.awk 20.tr > delay.dat
+## awk -f delayGraph.awk AODV.tr > delay.dat
 ## xgraph delay.dat -titles -title "N-N Delay" -title_x "Time" -title_y "Delay"
 
 BEGIN{

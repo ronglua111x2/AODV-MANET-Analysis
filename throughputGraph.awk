@@ -1,5 +1,5 @@
 ## AWK file for throughput ##
-## awk -f throughputGraph.awk 20.tr > throughput.dat
+## awk -f throughputGraph.awk AODV.tr > throughput.dat
 ## xgraph throughput.dat -titles -title "Throughput" -title_x "Time" -title_y "Throughput (kbps)"
 
 BEGIN {

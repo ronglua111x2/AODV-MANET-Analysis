@@ -1,6 +1,6 @@
 *.tr
 *.dat
 *.nam
-*.goutputstream-44BFZ2
+*.goutputstream-*
 *.txt
-.sh
+#.sh
