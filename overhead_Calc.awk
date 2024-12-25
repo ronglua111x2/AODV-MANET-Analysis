@@ -1,6 +1,6 @@
 BEGIN{
-recvPacket = 0;# to calculate total number of data packets received
-routingPacket = 0;# to calculate total number of routing packets received
+recvPacket = 0;
+routingPacket = 0;
 }
 
 {
@@ -9,11 +9,9 @@ routingPacket = 0;# to calculate total number of routing packets received
     trace_level = $4;
     packet_type = $7; 
     packet_ID = $6; 
-    
-    #Check if it is a data packet
+
     if (( event == "r") && (packet_type =="tcp" ) && ( trace_level=="AGT" )) recvPacket++;
 
-    #Check if it is a routing packet
     if ((event == "s" || event == "f") && trace_level == "RTR" && (packet_type =="AODV" || packet_type =="message")) routingPacket++;
 }
 

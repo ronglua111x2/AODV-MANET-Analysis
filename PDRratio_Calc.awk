@@ -1,79 +1,30 @@
 BEGIN {   
-  maxpac_id=0;
-
-  recevepkt = 0;
-   
-  sendspkt = 0;
-   
+  recvPacket = 0;
+  sendPacket = 0;
   routingpkts = 0;
-   
-  receivespkt = 0;
-   
-  sum = 0;
-
 }
 
 {
-  evento = $1;
-   
-  tempo = $3;
-   
-  pac_id = $41;
-   
-  agt = $4;
-   
-  tcbr = $35;
-   
-  token19 = $4;
-   
-  token1 = $1; 
+  event = $1;
+  trace_level = $4;
 
-  if ( token1 == "s" && token19=="AGT")
-	
-     sendspkt++;
+  if ( event == "s" && trace_level=="AGT")
+     sendPacket++;
 
-  if ( (token1 == "s" || token1 == "f") && token19=="RTR")
-	
-     rountingpkts++;
+  if ( (event == "s" || event == "f") && trace_level=="RTR")
+     routingPacket++;
 
-  if ( token1 == "r" && token19=="AGT")
-	
-     receivespkt++;
-
-  if ( evento == "r" && agt=="AGT")
-	
-     recevepkt++;
-	
-  if ( pac_id > maxpac_id ) maxpac_id = pac_id;
-   
-  if ( ! ( pac_id in tempIn ) ) tempIn[pac_id] = tempo;
-   
-  if ( evento != "d" ) {
-        
-          if ( evento == "r" )  tempoFim[pac_id] = tempo;
-   
-     } else tempoFim[pac_id] = 0;
-
+  if ( event == "r" && trace_level=="AGT")
+     recvPacket++;
 }
 END {
-
-   for ( pac_id = 0; pac_id <= maxpac_id + 1; pac_id++ ) {
-     
-        duracao =  tempoFim[pac_id] - tempIn[pac_id];
-      
-       if ( duracao > 0 ) {
-          sum = sum + duracao;
-       }
-   }
-  
- printf("Packets Sent = %d packets\n", sendspkt);
+ printf("Packets Sent = %d packets\n", sendPacket);
  
- printf("Packets Received = %d packets\n", receivespkt);
+ printf("Packets Received = %d packets\n", recvPacket);
  
- printf("Packet Delivery Ratio = %f \n", recevepkt/sendspkt*100);
+ printf("Packet Delivery Ratio = %f \n", recvPacket/sendPacket*100);
  
- printf("Network Overhead = %d packets\n", rountingpkts);
+ printf("Network Overhead = %d packets\n", routingPacket);
  
- exit 0
-
+ exit 0;
 }

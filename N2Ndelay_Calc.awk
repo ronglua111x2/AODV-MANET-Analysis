@@ -1,8 +1,6 @@
 BEGIN{
-	
     seqno = -1;
     count = 0;
- 
 }
 
 {
@@ -27,7 +25,6 @@ BEGIN{
 END { 
 
         for(i=0; i<= seqno; i++) {
-
                 if(end_time[i] > 0){
 
                 delay[i]= end_time[i] - start_time[i];
@@ -41,7 +38,6 @@ END {
         }
 
         for(i=0; i <= seqno; i++) {
-
                 if(delay[i] >0) {
 
                         n_to_n_delay = n_to_n_delay + delay[i];
