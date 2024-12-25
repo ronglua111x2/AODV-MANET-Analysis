@@ -1,11 +1,8 @@
-## TCL FILE ##
-#xgraph -P 20.tr -titles -title "Throuput" -title_x "Time" -title_y ""
-#xgraph -P -titles -title "Throuput" -title_x "Time" -title_y ""
+
 Mac/802_11 set basicRate_ 11Mb              ;#Rate for Control FramesZ
 Mac/802_11 set max_cache-entries 50
-#===================================
-#     Simulation parameters setup
-#===================================
+
+##Khởi tạo các tham số cài đặt mạng
 set val(chan)   Channel/WirelessChannel    ;# channel type
 set val(prop)   Propagation/TwoRayGround   ;# radio-propagation model
 set val(netif)  Phy/WirelessPhy            ;# network interface type
@@ -14,14 +11,15 @@ set val(ifq)    Queue/DropTail/PriQueue    ;# interface queue type
 set val(ll)     LL                         ;# link layer type
 set val(ant)    Antenna/OmniAntenna        ;# antenna model
 set val(ifqlen) 20                         ;# max packet in ifq
+##Khởi tạo các tham số tạo node
 set val(nn)     30                         ;# number of mobilenodes
 set val(rp)     AODV                       ;# routing protocol
 set val(x)      7000                       ;# X dimension of topography
 set val(y)      7000                       ;# Y dimension of topography
 set val(stop)   40.0                       ;# time of simulation end
-set val(source)                          ;# set source node
-set val(dest)   9                         ;# set dest node
-set val(speed)  5                         ;# set node speed
+set val(source) 12                         ;# set source node
+set val(dest)   9                          ;# set dest node
+set val(speed)  5                          ;# set node speed
 set ns [new Simulator]
 
 #Setup topography object

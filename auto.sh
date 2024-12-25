@@ -1,7 +1,7 @@
 #!/bin/bash
 
-awk -f throughputCalc.awk AODV.tr >> output.txt
-awk -f delayCalc.awk AODV.tr >> output.txt
+awk -f throughput_Calc.awk AODV.tr >> output.txt
+awk -f delay_Calc.awk AODV.tr >> output.txt
 awk -f overheadCalc.awk AODV.tr >> output.txt
-awk -f paket_delivery_ratio.awk AODV.tr >> output.txt
+awk -f PDRratio_Calc.awk AODV.tr >> output.txt
 echo "---------------" >> output.txt

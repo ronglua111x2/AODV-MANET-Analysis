@@ -1,18 +1,24 @@
 BEGIN{
-recvd = 0;# to calculate total number of data packets received
-rt_pkts = 0;# to calculate total number of routing packets received
+recvPacket = 0;# to calculate total number of data packets received
+routingPacket = 0;# to calculate total number of routing packets received
 }
 
 {
-#Check if it is a data packet
-if (( $1 == "r") && ($7 =="tcp" ) && ( $4=="AGT" )) recvd++;
+    event = $1;
+    time = $2;
+    trace_level = $4;
+    packet_type = $7; 
+    packet_ID = $6; 
+    
+    #Check if it is a data packet
+    if (( event == "r") && (packet_type =="tcp" ) && ( trace_level=="AGT" )) recvPacket++;
 
-#Check if it is a routing packet
-if (($1 == "s" || $1 == "f") && $4 == "RTR" && ($7 =="AODV" || $7 =="message")) rt_pkts++;
+    #Check if it is a routing packet
+    if ((event == "s" || event == "f") && trace_level == "RTR" && (packet_type =="AODV" || packet_type =="message")) routingPacket++;
 }
 
 END{
 
-printf("Overhead Ratio = %.3f\n", rt_pkts/recvd);
+    printf("Overhead Ratio = %.3f\n", routingPacket/recvPacket);
 
 }

@@ -16,7 +16,6 @@ BEGIN{
     event = $1;
     time = $2;
     trace_level = $4;
-    packet_size = $8;
     packet_type = $7; 
     packet_ID = $6;
 

@@ -1,4 +1,3 @@
-## AWK file for Packet Delivery Ratio ##
 BEGIN {   
   maxpac_id=0;
 
@@ -11,7 +10,6 @@ BEGIN {
   receivespkt = 0;
    
   sum = 0;
-
 
 }
 

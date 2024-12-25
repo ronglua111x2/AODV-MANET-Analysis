@@ -1,8 +1,6 @@
-## AWK file for throughput ##
-
 BEGIN {
 
-  recvsize=0;
+  recvPacketSize=0;
 
   txsize=0;
 
@@ -17,47 +15,22 @@ BEGIN {
 }
  
 {
+    event = $1;
+    time = $2;
+    trace_level = $4;
+    packet_size = $8;
  
-  if($4=="AGT" && $1=="s")
-     
-    {
-       if($2<startTime)
-           
-          {startTime=$2;}
-     
-    txsize++;
-    
-    }
- 
-  if($4=="AGT" && $1=="r")
-    
-    {
-        
-       if($2>stopTime)
-         
-          {stopTime=$2;}
-      
-    recvsize++;
-     
+  if(trace_level=="AGT" && event=="r")
+    { 
+       if(time>stopTime)   
+          {stopTime=time;}
+       recvPacketSize += packet_size;   
     } 
-          
-
-   if($4=="AGT" && $1=="d")
-     
-    {
       
-       drpsize++;
-
-    }
-     
 }
 
-
 END {
-
-
-print("Throughput = ",recvsize/(stopTime-startTime),"Kbps");
- 
+print("Throughput = ",recvPacketSize/(stopTime-startTime),"Kbps");
 
 }
 
